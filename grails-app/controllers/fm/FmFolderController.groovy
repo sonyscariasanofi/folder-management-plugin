@@ -1479,7 +1479,7 @@ class FmFolderController {
     private boolean isAdmin() {
         if ("anonymousUser" != springSecurityService.getPrincipal()) {
             def user = AuthUser.findByUsername(springSecurityService.getPrincipal().username)
-            if (!user.isAdmin()) {
+            if (!user.isAdmin() && !user.isAdvancedUser()) {
                 render(status: 200, text: "You do not have permission to edit this object's metadata.")
                 return false
             }
